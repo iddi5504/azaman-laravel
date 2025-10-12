@@ -17,8 +17,6 @@ import { LoaderCircle } from 'lucide-vue-next';
         <Head title="Register" />
 
         <div class="flex flex-col items-center gap-6">
-
-
             <Form v-bind="RegisteredUserController.store.form()"
                 :reset-on-success="['password', 'password_confirmation']" v-slot="{ errors, processing }"
                 class="w-full max-w-md flex flex-col gap-6 bg-white rounded-2xl p-6 shadow-lg">
