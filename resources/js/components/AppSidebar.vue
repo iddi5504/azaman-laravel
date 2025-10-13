@@ -14,7 +14,7 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, User, PlusCircle, Clipboard, Video } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -22,6 +22,31 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Start Transfer',
+        href: '#',
+        icon: PlusCircle,
+    },
+    {
+        title: 'Open Transactions',
+        href: '#',
+        icon: Clipboard,
+    },
+    {
+        title: 'Transaction History',
+        href: '#',
+        icon: Folder,
+    },
+    {
+        title: 'Profile / Settings',
+        href: '#',
+        icon: User,
+    },
+    {
+        title: 'Tutorials',
+        href: '#',
+        icon: Video,
     },
 ];
 
@@ -40,24 +65,25 @@ const footerNavItems: NavItem[] = [
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset">
-        <SidebarHeader>
+    <Sidebar collapsible="icon" variant="inset"
+        class="bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700">
+        <SidebarHeader class="p-4">
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
-                        <Link :href="dashboard()">
-                            <AppLogo />
+                    <SidebarMenuButton size="lg" as-child class="w-full">
+                        <Link :href="dashboard()" class="flex items-center space-x-2">
+                        <AppLogo class="w-8 h-8" />
                         </Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarHeader>
 
-        <SidebarContent>
+        <SidebarContent class="mt-6">
             <NavMain :items="mainNavItems" />
         </SidebarContent>
 
-        <SidebarFooter>
+        <SidebarFooter class="p-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
             <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>

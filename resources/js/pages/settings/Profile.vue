@@ -58,9 +58,11 @@ const handleFileChange = (event: Event) => {
                         <div class="flex items-center gap-4">
                             <div
                                 class="relative w-20 h-20 rounded-full overflow-hidden border border-neutral-300 dark:border-neutral-700">
-                                <img id="profile" :src="'/storage/' + user.profile_picture || '/assets/images/user.png'"
-                                    alt="Profile Picture" class="object-fill" />
+                                <img id="profile"
+                                    :src="user.profile_picture ? '/storage/' + user.profile_picture : '/assets/images/user.png'"
+                                    alt="Profile Picture" class="w-full h-full object-cover" />
                             </div>
+
                             <Input id="profile_picture" type="file" @change="handleFileChange" name="profile_picture"
                                 accept="image/*" class="w-full" />
                         </div>

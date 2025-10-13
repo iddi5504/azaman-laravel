@@ -39,6 +39,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
+    protected $adminEmails = [
+        'iddi5504@gmail.com',
+        'admin@gmail.com'
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -50,5 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function isAdmin(): bool
+    {
+        return in_array($this->email, $this->adminEmails);
     }
 }

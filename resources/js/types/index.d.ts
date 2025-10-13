@@ -1,3 +1,4 @@
+import { WalletType } from '@/lib/constants';
 import { InertiaLinkProps } from '@inertiajs/vue3';
 import type { LucideIcon } from 'lucide-vue-next';
 
@@ -9,6 +10,12 @@ export interface BreadcrumbItem {
     title: string;
     href: string;
 }
+
+export interface SelectOption {
+    label: string;
+    value: string | number;
+}
+
 
 export interface NavItem {
     title: string;
@@ -23,6 +30,8 @@ export type AppPageProps<
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
+    isAdmin: boolean;
+    flash: { message: string; status: 'success' | 'error' | 'info' } | null;
     sidebarOpen: boolean;
 };
 
@@ -40,3 +49,14 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+
+export interface Wallet {
+    id: number;
+    gender: string;
+    owner_name: string;
+    icon?: string;
+    account_type: WalletType;
+    tag?: string;
+    countries?: string[];
+}
