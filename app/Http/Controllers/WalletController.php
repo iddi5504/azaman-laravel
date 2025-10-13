@@ -41,15 +41,41 @@ class WalletController extends Controller implements HasMiddleware
         return Inertia::render('admin/AddWallet');
     }
 
-    public function store(Request $request)
+
+    public function edit(Request $request, Wallet $wallet)
+    {
+        return Inertia::render('admin/AddWallet', [
+            'editMode' => true,
+            'wallet' => $wallet
+        ]);
+    }
+
+    public function update(Request $request, Wallet $wallet)
+    {
+        $validated = $this->validateFields($request);
+
+        $wallet->update($validated);
+
+        return redirect()->route('wallets.index')->with(getFlashMessageObject('success', 'Wallet has been updated'));
+    }
+
+    function validateFields(Request $request)
     {
         $validated = $request->validate([
             'gender' => ['required'],
+            'name' => ['sometimes', 'max:150'],
             'owner_name' => ['required', 'max:100'],
             'tag' => ['required'],
             'account_type' => ['required'],
             'country' => ['required'],
         ]);
+
+        return $validated;
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $this->validateFields($request);
 
         if ($request->hasFile('icon')) {
             $path = $this->upload($request->file('icon'), 'wallet-icons');
@@ -59,5 +85,11 @@ class WalletController extends Controller implements HasMiddleware
         Wallet::create($validated);
 
         return redirect()->route('wallets.index')->with(getFlashMessageObject('success', 'New wallet has been added'));
+    }
+
+    public function destroy(Request $request, Wallet $wallet)
+    {
+        $wallet->delete();
+        return redirect()->route('wallets.index')->with(getFlashMessageObject('success', 'Wallet has been deleted'));
     }
 }

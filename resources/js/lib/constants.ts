@@ -18,7 +18,17 @@ export enum WalletType {
 
 }
 
-export const countryOptions = countries.map((country) => ({ label: country, value: country.toLowerCase() }));
+export const walletIconsMap: Partial<Record<string, string>> = {
+    paypal: '/assets/images/paypal.png',
+    cashapp: '/assets/images/cash-app.png',
+    applepay: '/assets/images/apple-pay.png',
+    venmo: '/assets/images/venmo.png',
+    zelle: '/assets/images/zelle.png',
+    banktransfer: '/assets/images/bank.png',
+    etransfer: '/assets/images/bank.png',
+}
+
+export const countryOptions = countries.map((country) => ({ label: country, value: country.toLowerCase(), }));
 
 export const genderOptions = Object.keys(Genders).map((key) => ({
     label: Genders[key as keyof typeof Genders],
@@ -27,13 +37,9 @@ export const genderOptions = Object.keys(Genders).map((key) => ({
 
 export const accountTypeOptions = Object.keys(WalletType).map((key) => ({
     label: WalletType[key as keyof typeof WalletType],
-    value: key.toLowerCase()
+    value: key.toLowerCase(),
+    icon: walletIconsMap[key.toLowerCase() as keyof typeof walletIconsMap] || 'aj'
 }));
 
 
 
-export const walletIconsMap: Partial<Record<WalletType, string>> = {
-    [WalletType.PAYPAL.toLowerCase()]: '/assets/images/paypal.png',
-    [WalletType.CASHAPP.toLowerCase()]: '/assets/images/cash-app.png',
-    [WalletType.APPLEPAY.toLowerCase()]: '/assets/images/apple-pay.png',
-}

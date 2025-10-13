@@ -18,16 +18,11 @@ import { SelectOption } from '@/types';
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
     options: SelectOption[];
-    modelValue?: string;
     placeholder?: string;
 }>()
 
-const selected = ref(props.modelValue || '');
+const selected = defineModel<String | String[]>()
 
-watch(selected, (val) => {
-    // Emit v-model update
-    emit('update:modelValue', val);
-});
 </script>
 
 <template>
@@ -47,10 +42,11 @@ watch(selected, (val) => {
 
                 <SelectViewport class="p-1">
                     <SelectItem v-for="option in props.options" :key="option.value" :value="option.value"
-                        class="relative flex items-center px-3 h-6 text-sm rounded cursor-pointer select-none data-[highlighted]:bg-green-500 data-[highlighted]:text-white">
+                        class="relative flex items-center px-3 py-4 h-6 text-sm rounded cursor-pointer select-none data-[highlighted]:bg-green-500 data-[highlighted]:text-white">
                         <SelectItemIndicator class="absolute left-0 w-5 flex justify-center">
                             <Icon icon="radix-icons:check" class="h-3 w-3" />
                         </SelectItemIndicator>
+                        <img :src="option.icon" class="w-6 h-6 object-contain mr-2" />
                         <SelectItemText>{{ option.label }}</SelectItemText>
                     </SelectItem>
                 </SelectViewport>

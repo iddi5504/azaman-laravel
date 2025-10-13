@@ -14,6 +14,7 @@ export interface BreadcrumbItem {
 export interface SelectOption {
     label: string;
     value: string | number;
+    icon?: string;
 }
 
 
@@ -53,6 +54,7 @@ export type BreadcrumbItemType = BreadcrumbItem;
 
 export interface Wallet {
     id: number;
+    name: string;
     gender: string;
     owner_name: string;
     icon?: string;

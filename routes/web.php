@@ -16,7 +16,10 @@ Route::middleware(['auth', 'verified', DashboardMiddleware::class])->group(funct
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::post('/wallets', [WalletController::class, 'store'])->name('wallets.store');
+    Route::delete('/wallets/{wallet}', [WalletController::class, 'destroy'])->name('wallets.destroy');
     Route::get('/admin/add-wallet', [WalletController::class, 'create'])->name('add-wallet');
+    Route::get('/admin/edit-wallet/{wallet}', [WalletController::class, 'edit'])->name('wallet.edit');
+    Route::patch('/admin/edit-wallet/{wallet}', [WalletController::class, 'update'])->name('wallet.update');
 });
 
 require __DIR__ . '/settings.php';

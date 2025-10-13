@@ -8,30 +8,62 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import SelectField from '@/components/ui/select/SelectField.vue';
 import wallets from '@/routes/wallets';
 import InputError from '@/components/InputError.vue';
+import { onMounted } from 'vue';
+import { Wallet } from '@/types';
+import { preProcessFile } from 'typescript';
+import wallet, * as WalletRoute from '@/routes/wallet';
 
 const form = useForm({
     gender: '',
     owner_name: '',
+    name: '',
     icon: null,
     account_type: '',
     tag: '',
-    country: [],
+    country: [] as string[],
 });
+
+const props = defineProps<{
+    editMode: boolean,
+    wallet: Wallet
+}>()
+
+onMounted(() => {
+    if (props.wallet) {
+        Object.keys(props.wallet).forEach((k) => {
+            (form as any)[k] = props.wallet[k as keyof Wallet]
+        })
+    }
+})
+
 
 
 const handleSubmit = () => {
-    form.post(wallets.index.form().action, {
-        onSuccess: () => form.reset('icon'),
-    });
+    if (props.editMode) {
+        form.patch(WalletRoute.edit(props.wallet.id).url, {
+            onSuccess: () => form.reset('icon'),
+        });
+    } else {
+        form.post(wallets.index.form().action, {
+            onSuccess: () => form.reset('icon'),
+        });
+    }
 };
 </script>
 
 <template>
     <AppLayout>
         <div class="max-w-3xl mx-auto p-6 space-y-6">
-            <h1 class="text-2xl font-bold">Create Wallet</h1>
+            <h1 class="text-2xl font-bold">{{ editMode ? 'Update' : 'Create' }} Wallet</h1>
 
             <form @submit.prevent="handleSubmit" class="space-y-6">
+                <!-- Name -->
+                <div class="grid gap-2">
+                    <Label for="name">Name</Label>
+                    <Input id="name" v-model="form.name" placeholder="Name" required />
+
+                    <InputError :message="form.errors.name" />
+                </div>
                 <!-- Gender -->
                 <div class="grid gap-2">
                     <Label for="gender">Gender</Label>
@@ -51,7 +83,7 @@ const handleSubmit = () => {
                 <!-- Icon -->
                 <div class="grid gap-2">
                     <Label for="icon">Icon</Label>
-                    <Input id="icon" type="file" @change="e => form.icon = e.target.files[0]" />
+                    <Input id="icon" type="file" @change="(e: any) => form.icon = e.target?.files?.[0]" />
                 </div>
 
                 <!-- Account Type -->
@@ -80,7 +112,8 @@ const handleSubmit = () => {
 
                 </div>
 
-                <Button type="submit" class="mt-4 w-full">Create Wallet</Button>
+                <Button type="submit" :loading="form.processing" class="mt-4 w-full">{{ editMode ? 'Edit' : 'Create' }}
+                    Wallet</Button>
             </form>
         </div>
     </AppLayout>
