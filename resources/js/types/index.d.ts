@@ -13,7 +13,7 @@ export interface BreadcrumbItem {
 
 export interface SelectOption {
     label: string;
-    value: string | number;
+    value: string | number | null;
     icon?: string;
 }
 

@@ -30,9 +30,10 @@ class WalletController extends Controller implements HasMiddleware
 
     public function index(Request $request)
     {
-        $wallets =  Wallet::all();
+        $wallets =  Wallet::Filter($request->only(['search', 'account_type']))->get();
         return Inertia::render('Wallets', [
-            'wallets' => $wallets
+            'wallets' => $wallets,
+            'query' => $request->query()
         ]);
     }
 
