@@ -22,7 +22,7 @@ class Wallet extends Model
     {
         if ($fields['search'] ?? false) {
             $q->where(function ($q) {
-                $q->where('name', 'like', '%' . request('search') . '%')->orWhere('owner_name', 'like',  '%' . request('search') . '%');
+                $q->where('name', 'ilike', '%' . request('search') . '%')->orWhere('owner_name', 'ilike',  '%' . request('search') . '%');
             });
         }
 

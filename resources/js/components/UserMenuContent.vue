@@ -20,25 +20,36 @@ defineProps<Props>();
 </script>
 
 <template>
-    <DropdownMenuLabel class="p-0 font-normal">
-        <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            <UserInfo :user="user" :show-email="true" />
-        </div>
-    </DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuGroup>
+    <div class="min-w-[200px]">
+        <DropdownMenuLabel class="p-0 font-normal">
+            <div
+                class="flex items-center gap-3 px-3 py-2 text-left text-sm hover:bg-muted/50 transition-colors rounded-md">
+                <UserInfo :user="user" :show-email="true" />
+            </div>
+        </DropdownMenuLabel>
+
+        <DropdownMenuSeparator class="my-1" />
+
+        <DropdownMenuGroup>
+            <DropdownMenuItem :as-child="true">
+                <Link
+                    class="flex items-center w-full px-3 py-2 text-sm rounded-md transition-colors hover:bg-muted focus:bg-muted"
+                    :href="edit()" prefetch as="button">
+                <Settings class="mr-2 h-4 w-4 text-muted-foreground" />
+                <span>Settings</span>
+                </Link>
+            </DropdownMenuItem>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator class="my-1" />
+
         <DropdownMenuItem :as-child="true">
-            <Link class="block w-full" :href="edit()" prefetch as="button">
-            <Settings class="mr-2 h-4 w-4" />
-            Settings
+            <Link
+                class="flex items-center w-full px-3 py-2 text-sm text-red-600 rounded-md transition-colors hover:bg-red-50 focus:bg-red-50"
+                :href="logout()" @click="handleLogout" as="button" data-test="logout-button">
+            <LogOut class="mr-2 h-4 w-4" />
+            <span>Log out</span>
             </Link>
         </DropdownMenuItem>
-    </DropdownMenuGroup>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem :as-child="true">
-        <Link class="block w-full" :href="logout()" @click="handleLogout" as="button" data-test="logout-button">
-        <LogOut class="mr-2 h-4 w-4" />
-        Log out
-        </Link>
-    </DropdownMenuItem>
+    </div>
 </template>

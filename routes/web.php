@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WalletController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\DashboardMiddleware;
@@ -12,8 +13,11 @@ Route::middleware(['auth', 'verified', DashboardMiddleware::class])->group(funct
     })->name('dashboard');
 
     Route::get('/wallets', [WalletController::class, 'index'])->name('wallets.index');
+
+    Route::get('/start-transaction/{wallet}', [TransactionController::class, 'index'])->name('transaction.create');
 });
 
+// Admin routes
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::post('/wallets', [WalletController::class, 'store'])->name('wallets.store');
     Route::delete('/wallets/{wallet}', [WalletController::class, 'destroy'])->name('wallets.destroy');

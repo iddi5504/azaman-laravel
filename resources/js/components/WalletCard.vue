@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { walletIconsMap } from '@/lib/constants';
+import { accountTypeOptions, walletIconsMap } from '@/lib/constants';
 import { Wallet } from '@/types';
 import { Delete, DeleteIcon, Edit, MenuIcon, Trash, View } from 'lucide-vue-next';
 import DropdownMenu from './ui/dropdown-menu/DropdownMenu.vue';
@@ -10,6 +10,7 @@ import wallets from '@/routes/wallets';
 import * as walletRoute from '@/routes/wallet';
 import Button from './ui/button/Button.vue';
 import Dialog from './ui/dialog/Dialog.vue';
+import transaction from '@/routes/transaction';
 
 
 const props = defineProps<{ wallet: Wallet }>()
@@ -19,6 +20,10 @@ const showWalletDetailsDialog = ref(false)
 
 const editWallet = () => {
     form.get(walletRoute.edit(props.wallet.id).url);
+}
+
+const startTransaction = () => {
+    form.get(transaction.create(props.wallet.id).url)
 }
 
 const form = useForm({});
@@ -90,7 +95,8 @@ const deleteWallet = () => {
                         alt="Wallet Icon" class="h-14 w-14 rounded-full border object-cover" />
                     <div>
                         <h2 class="text-lg font-semibold text-gray-900">{{ wallet.owner_name }}</h2>
-                        <p class="text-sm text-gray-500">{{ wallet.account_type }}</p>
+                        <p class="text-sm text-gray-500">{{accountTypeOptions.find((a) => a.value ===
+                            wallet.account_type)?.label}}</p>
                     </div>
                 </div>
 
@@ -112,7 +118,8 @@ const deleteWallet = () => {
 
                     <div>
                         <span class="block text-gray-400">Account Type</span>
-                        <span class="font-medium text-gray-800">{{ wallet.account_type }}</span>
+                        <span class="font-medium text-gray-800">{{accountTypeOptions.find((a) => a.value ===
+                            wallet.account_type)?.label}}</span>
                     </div>
 
                     <div v-if="wallet.tag">
@@ -129,7 +136,8 @@ const deleteWallet = () => {
 
             <template #actions>
                 <Button v-if="$page.props.isAdmin" :variant="'outline'" @click="editWallet()">Edit </Button>
-                <Button @click="showWalletDetailsDialog = false">Close</Button>
+                <Button @click="showWalletDetailsDialog = false" :variant="'outline'">Close</Button>
+                <Button @click="startTransaction">Start a Transaction</Button>
             </template>
         </Dialog>
     </div>

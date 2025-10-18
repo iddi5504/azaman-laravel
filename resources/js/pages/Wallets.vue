@@ -27,7 +27,9 @@ const query = reactive({
 const filter = () => {
     form.get(WalletsRoute.index({
         query: query
-    }).url)
+    }).url, {
+        preserveState: true
+    })
 }
 const debounceFilter = useDebounceFn(filter, 600)
 

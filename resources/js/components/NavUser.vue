@@ -10,8 +10,7 @@ import {
 import { usePage } from '@inertiajs/vue3';
 import { ChevronsUpDown } from 'lucide-vue-next';
 import UserMenuContent from './UserMenuContent.vue';
-import { DropdownMenu } from 'reka-ui/namespaced';
-import { DropdownMenuContent, DropdownMenuTrigger } from 'reka-ui';
+import { DropdownMenuContent, DropdownMenuRoot, DropdownMenuTrigger, } from 'reka-ui';
 
 const page = usePage();
 const user = page.props.auth.user;
@@ -21,24 +20,24 @@ const { isMobile, state } = useSidebar();
 <template>
     <SidebarMenu>
         <SidebarMenuItem>
-            <DropdownMenu>
+            <DropdownMenuRoot>
                 <DropdownMenuTrigger as-child>
                     <SidebarMenuButton size="lg"
-                        class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                        class="flex w-full items-center justify-between gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted/50 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         data-test="sidebar-menu-button">
                         <UserInfo :user="user" />
-                        <ChevronsUpDown class="ml-auto size-4" />
+                        <ChevronsUpDown
+                            class="ml-auto h-4 w-4 text-muted-foreground transition-transform duration-200 data-[state=open]:rotate-180" />
                     </SidebarMenuButton>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent class="w-(--reka-dropdown-menu-trigger-width) min-w-56 rounded-lg" :side="isMobile
-                        ? 'bottom'
-                        : state === 'collapsed'
-                            ? 'left'
-                            : 'bottom'
-                    " align="end" :side-offset="4">
+
+                <DropdownMenuContent
+                    class="min-w-56 w-(--reka-dropdown-menu-trigger-width) rounded-lg border border-border bg-popover p-1 shadow-md"
+                    :side="isMobile ? 'bottom' : state === 'collapsed' ? 'left' : 'bottom'" align="end"
+                    :side-offset="6">
                     <UserMenuContent :user="user" />
                 </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenuRoot>
         </SidebarMenuItem>
     </SidebarMenu>
 </template>
