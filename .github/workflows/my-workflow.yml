@@ -33,10 +33,10 @@ jobs:
         run: ./vendor/bin/phpunit
 
       - name: Connect to VPS
-        uses: appleboy/ssh-action@v1
+        uses: tiyee/action-ssh@1.0.1
         with:
           host: ${{ secrets.VPS_IP }}
-          key: ${{ secrets.DIGITAL_OCEAN_SSH }}
+          privateKey: ${{ secrets.DIGITAL_OCEAN_SSH }}
           username: ${{ secrets.VPS_USERNAME }}
           script: |
             git clone https://github.com/iddi5504/azaman-laravel.git
