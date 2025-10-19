@@ -33,11 +33,15 @@ jobs:
         run: ./vendor/bin/phpunit
 
       - name: Connect to VPS
-        uses: invi5H/ssh-action@v1
+        uses: tiyee/action-ssh@release
         with:
-          SSH_HOST: ${{ secrets.VPS_IP }}
-          SSH_KEY: ${{ secrets.DIGITAL_OCEAN_SSH }}
-          SSH_USER: ${{ secrets.VPS_USERNAME }}
+          host: ${{ secrets.VPS_IP }}
+          privateKey: ${{ secrets.DIGITAL_OCEAN_SSH }}
+          username: ${{ secrets.VPS_USERNAME }}
+          command: |
+            git clone https://github.com/iddi5504/azaman-laravel.git
+            cd azaman-laravel
+            chmod +x build.sh
 
 
         
