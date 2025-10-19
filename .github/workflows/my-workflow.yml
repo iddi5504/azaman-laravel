@@ -19,3 +19,17 @@ jobs:
 
       - name: Copy enviromental variables
         run: cp .env.test .env
+
+      - name: Install laravel project 
+        run: composer install
+      
+      - name: Run migrations
+        run: php artisan migrate
+
+      - name: Run php static analysis
+        run: ./vendor/bin/phpstan analyze
+
+      - name: Run unit tests using phpunit
+        run: ./vendor/bin/phpunit
+
+        
