@@ -32,4 +32,11 @@ jobs:
       - name: Run unit tests using phpunit
         run: ./vendor/bin/phpunit
 
+      - name: Deploy using ssh
+        uses: invi5H/ssh-action@v1
+        with:
+          SSH_HOST: root 
+          SSH_KEY: ${{secrets.DIGITAL_OCEAN_SSH}}
+
+
         
