@@ -36,7 +36,7 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_IP }}
-          privateKey: ${{ secrets.DIGITAL_OCEAN_SSH }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH }}
           username: ${{ secrets.VPS_USERNAME }}
           script: |
             git clone https://github.com/iddi5504/azaman-laravel.git
