@@ -1,0 +1,14 @@
+name: My first workflow
+on: 
+  push: 
+    branch: master
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repository
+        uses: actions/checkout@v4
+      - name: Set up php on virtual machine
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
