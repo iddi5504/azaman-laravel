@@ -32,16 +32,28 @@ jobs:
       - name: Run unit tests using phpunit
         run: ./vendor/bin/phpunit
 
-      - name: Connect to VPS
-        uses: GPTED/SSH-My-Action@0.1
-        with:
-          HOST: ${{ secrets.VPS_IP }}
-          PRIVATE_KEY: ${{ secrets.DIGITAL_OCEAN_SSH }}
-          USER: ${{ secrets.VPS_USERNAME }}
-          CMD: |
-            git clone https://github.com/iddi5504/azaman-laravel.git
-            cd azaman-laravel
-            sudo chmod +x build.sh
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DIGITAL_OCEAN_SSH }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Test SSH connection
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no deploy@${{ secrets.VPS_IP }} "echo '✅ SSH connection successful'"
+
+
+
+      # - name: Connect to VPS
+      #   uses: GPTED/SSH-My-Action@0.1
+      #   with:
+      #     HOST: ${{ secrets.VPS_IP }}
+      #     PRIVATE_KEY: ${{ secrets.DIGITAL_OCEAN_SSH }}
+      #     USER: ${{ secrets.VPS_USERNAME }}
+      #     CMD: |
+      #       git clone https://github.com/iddi5504/azaman-laravel.git;
+      #       cd azaman-laravel;
+      #       sudo chmod +x build.sh;
 
 
         
