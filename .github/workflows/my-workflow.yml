@@ -43,9 +43,14 @@ jobs:
           PRIVATE_KEY: ${{ secrets.DIGITAL_OCEAN_SSH }}
           USER: ${{ secrets.VPS_USERNAME }}
           CMD: |
-            git clone https://github.com/iddi5504/azaman-laravel.git;
-            cd azaman-laravel;
-            ls -la;
+            if [ -d "azaman-laravel" ]; then 
+              cd azaman-laravel;
+              git pull;
+            else
+              git clone https://github.com/iddi5504/azaman-laravel.git;
+              cd azaman-laravel;
+            fi   
+
             chmod +x build.sh;
             ./build.sh;
 
