@@ -1,3 +1,19 @@
-echo "Building the project..."
+#!/bin/bash
 
-echo "This is comming from the shell script i wrote , yayayyyys"
+set -e
+
+echo "Install npm packages"
+
+npm install
+
+echo "Install laravel packages"
+
+composer install --no-interaction --prefer-dist --optimize-autoloader
+
+echo "Make migrations"
+
+php artisan migrate --force
+
+echo "Serve app"
+
+php artisan serve --host=0.0.0.0 --port=8000 
