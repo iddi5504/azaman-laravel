@@ -49,7 +49,7 @@ jobs:
             else
               git clone https://github.com/iddi5504/azaman-laravel.git;
               cd azaman-laravel;
-            fi   
+            fi;   
 
             chmod +x build.sh;
             ./build.sh;
