@@ -10,6 +10,10 @@ echo "Install laravel packages"
 
 composer install --no-interaction --prefer-dist --optimize-autoloader
 
+echo "Install telescope"
+
+php artisan telscope:install
+
 echo "Make migrations"
 
 php artisan migrate --force
