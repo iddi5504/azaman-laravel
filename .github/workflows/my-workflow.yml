@@ -32,6 +32,10 @@ jobs:
       - name: Run unit tests using phpunit
         run: ./vendor/bin/phpunit
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Connect to VPS
         uses: GPTED/SSH-My-Action@0.1
         with:
@@ -44,5 +48,6 @@ jobs:
             ls -la;
             chmod +x build.sh;
             ./build.sh;
+
 
         
