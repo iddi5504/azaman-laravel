@@ -10,10 +10,9 @@ echo "Install laravel packages"
 
 composer install --no-interaction --prefer-dist --optimize-autoloader
 
-echo "Install telescope"
+# echo "Install telescope"
 
-php artisan telescope:install
-
+# php artisan telescope:install
 
 echo "Copy env"
 
