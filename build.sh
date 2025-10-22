@@ -14,6 +14,10 @@ echo "Install telescope"
 
 php artisan telescope:install
 
+echo "Setup database"
+
+touch database/database.sqlite
+
 echo "Make migrations"
 
 php artisan migrate --force
