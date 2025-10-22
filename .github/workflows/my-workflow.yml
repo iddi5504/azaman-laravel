@@ -45,7 +45,10 @@ jobs:
           CMD: |
             if [ -d "azaman-laravel" ]; then 
               cd azaman-laravel;
-              git pull origin master;
+              git fetch origin master;
+              
+              git reset --hard origin/master;
+              
             else
               git clone https://github.com/iddi5504/azaman-laravel.git;
               cd azaman-laravel;
