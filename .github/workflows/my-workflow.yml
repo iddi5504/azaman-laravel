@@ -32,7 +32,6 @@ jobs:
       - name: Run unit tests using phpunit
         run: ./vendor/bin/phpunit
 
-
       - name: Connect to VPS
         uses: GPTED/SSH-My-Action@0.1
         with:
