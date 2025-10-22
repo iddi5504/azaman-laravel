@@ -12,7 +12,7 @@ composer install --no-interaction --prefer-dist --optimize-autoloader
 
 echo "Install telescope"
 
-php artisan telscope:install
+php artisan telescope:install
 
 echo "Make migrations"
 
