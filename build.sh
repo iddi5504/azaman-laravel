@@ -14,6 +14,11 @@ echo "Install telescope"
 
 php artisan telescope:install
 
+
+echo "Copy env"
+
+cp .env.test .env
+
 echo "Setup database"
 
 touch database/database.sqlite
