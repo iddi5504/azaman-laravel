@@ -41,7 +41,8 @@ jobs:
           CMD: |
             git clone https://github.com/iddi5504/azaman-laravel.git;
             cd azaman-laravel;
+            ls -la;
             chmod +x build.sh;
-            ./build.sh
+            ./build.sh;
 
         
