@@ -29,3 +29,8 @@ php artisan migrate --force
 echo "Serve app"
 
 php artisan serve --host=0.0.0.0 --port=8000 
+
+echo "Build app"
+
+npm run build
+
