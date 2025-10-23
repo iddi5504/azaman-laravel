@@ -18,9 +18,15 @@ echo "Copy env"
 
 cp .env.test .env
 
+
+echo "Generate app key"
+
+php artisan key:generate
+
 echo "Setup database"
 
 touch database/database.sqlite
+
 
 echo "Make migrations"
 
