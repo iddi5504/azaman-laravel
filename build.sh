@@ -2,6 +2,10 @@
 
 set -e
 
+echo "Use more memory"
+
+export NODE_OPTIONS="--max-old-space-size=2000"
+
 echo "Install npm packages"
 
 npm install
@@ -36,8 +40,5 @@ echo "Build app"
 
 npm run build
 
-echo "Serve app"
-
-php artisan serve --host=0.0.0.0 --port=8000 
 
 
