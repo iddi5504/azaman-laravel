@@ -44,9 +44,10 @@ jobs:
           USER: ${{ secrets.VPS_USERNAME }}
           CMD: |
             if [ -d "azaman-laravel" ]; then 
-            
+
               cd azaman-laravel;
               
+            
               git fetch origin master;
               
               git reset --hard origin/master;
