@@ -32,11 +32,12 @@ echo "Make migrations"
 
 php artisan migrate --force
 
+echo "Build app"
+
+npm run build
+
 echo "Serve app"
 
 php artisan serve --host=0.0.0.0 --port=8000 
 
-echo "Build app"
-
-npm run build
 
