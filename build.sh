@@ -24,7 +24,7 @@ touch database/database.sqlite
 
 echo "Make migrations"
 
-php artisan migrate:fresh --force
+php artisan migrate:refresh --force
 
 echo "Serve app"
 
