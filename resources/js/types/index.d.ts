@@ -70,6 +70,13 @@ export interface TransactionDetails {
     network_provider: string
 }
 
+export interface TransactionProof {
+    id: number
+    transaction_id: number
+    file_path: string
+    created_at: string
+    updated_at: string
+}
 export interface Transaction {
     id: number
     created_at: string
@@ -80,4 +87,5 @@ export interface Transaction {
     status: string
     mobile_money_network: string | null
     wallet: Wallet
+    transaction_proofs: TransactionProof[]
 }

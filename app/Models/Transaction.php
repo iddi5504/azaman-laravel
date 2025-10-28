@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Wallet;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -22,7 +23,6 @@ class Transaction extends Model
         'details' => 'array'
     ];
 
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -32,6 +32,7 @@ class Transaction extends Model
     {
         return $this->belongsTo(Wallet::class);
     }
+
 
     public function transactionProofs(): HasMany
     {

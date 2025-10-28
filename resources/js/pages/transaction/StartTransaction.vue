@@ -61,7 +61,7 @@ const selectProvider = (name: string) => {
 
 <template>
     <AppLayout>
-        <div class="w-3/6 mx-auto p-3">
+        <div class="max-w-2xl mx-auto p-3">
             <WalletCard :wallet="wallet" />
 
             <form @submit.prevent="submitForm" class="grid gap-5 pt-5 mt-4">
@@ -114,7 +114,7 @@ const selectProvider = (name: string) => {
                 </div>
 
                 <div class="pt-2">
-                    <Button type="submit" class="w-full">Submit</Button>
+                    <Button type="submit" :loading="form.processing" class="w-full">Submit</Button>
                 </div>
             </form>
         </div>

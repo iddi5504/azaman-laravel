@@ -2,6 +2,7 @@
 import TransactionCard from '@/components/TransactionCard.vue';
 import Button from '@/components/ui/button/Button.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
+import * as TransactionRoute from '@/routes/transaction';
 import transactionProof from '@/routes/transactionProof';
 import { Transaction } from '@/types';
 import { Form } from '@inertiajs/vue3';
@@ -37,8 +38,19 @@ const removeFile = () => {
             <h1 class="text-2xl font-semibold mb-6">Transaction Details</h1>
 
             <TransactionCard expand :transaction="transaction" />
+            <!-- div of submitted proof images -->
+            <div v-if="transaction.transaction_proofs.length" class="mt-5">
+                <h2 class="text-lg font-semibold mb-3">Submitted Proofs of Payment</h2>
+                <div v-if="transaction.transaction_proofs.length" class="grid grid-cols-2 gap-4">
+                    <div v-for="proof in transaction.transaction_proofs" :key="proof.id" class="border rounded-lg p-2">
+                        <img :src="proof.file_path" alt="Proof Image" class="w-full h-48 object-contain rounded-md" />
+                    </div>
+                </div>
+                <p v-else class="text-gray-500">No proofs of payment submitted yet.</p>
+            </div>
 
-            <Form :action="transactionProof.store(transaction.id)" method="post" enctype="multipart/form-data">
+            <Form v-if="!$page.props.isAdmin" :action="transactionProof.store(transaction.id)" reset-on-success
+                v-slot="{ processing }" method="post" enctype="multipart/form-data">
                 <div class="p-4 rounded-lg bg-white border mt-5">
                     <h2 class="text-lg font-semibold mb-1">Upload proof of payment</h2>
                     <p class="text-sm text-gray-600 mb-4">
@@ -81,8 +93,18 @@ const removeFile = () => {
                 </div>
 
                 <!-- submit -->
-                <Button type="submit" class="w-full mt-5">Submit Proof Of Payment</Button>
+                <Button type="submit" :loading="processing" class="w-full mt-5">Submit Proof Of Payment</Button>
             </Form>
+            <!-- approve -->
+            <div v-if="$page.props.isAdmin && transaction.status === 'processing'" class="mt-5">
+                <Form method="patch" :action="TransactionRoute.approveTransaction(transaction.id).url"
+                    v-slot="{ processing }">
+                    <Button type="submit" :loading="processing" class="w-full bg-green-600 hover:bg-green-700">
+                        Approve Transaction
+                    </Button>
+                </Form>
+                <p class="text-sm text-gray-600 mt-2">Once approved, the transaction will be processed.</p>
+            </div>
         </div>
     </AppLayout>
 </template>

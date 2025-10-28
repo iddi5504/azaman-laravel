@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\NetworkProviders;
+use App\Enums\TransactionStatus;
+use App\Http\Middleware\AdminMiddleware;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rules\Enum;
 use Inertia\Inertia;
 
@@ -14,6 +18,14 @@ use Inertia\Inertia;
 class TransactionController extends Controller
 {
     //
+
+    public function middleware()
+    {
+        return [
+            new Middleware(AdminMiddleware::class, only: ['approveTransaction'])
+        ];
+    }
+
     public function index(Request $request)
     {
         $transactions = Transaction::with('wallet')->where('user_id', Auth::user()->id)->get();
@@ -24,7 +36,7 @@ class TransactionController extends Controller
 
     public function show(Request $request, Transaction $transaction)
     {
-        $transaction->load('wallet');
+        $transaction->load(['wallet', 'transactionProofs']);
         return Inertia::render('transaction/TransactionShow', compact('transaction'));
     }
 
@@ -33,6 +45,13 @@ class TransactionController extends Controller
         return Inertia::render('transaction/StartTransaction', [
             'wallet' => $wallet
         ]);
+    }
+
+    public function approveTransaction(Transaction $transaction)
+    {
+        $transaction->status = TransactionStatus::COMPELETED->value;
+        $transaction->save();
+        return redirect()->route('transaction.show', $transaction->id)->with('success', 'Transaction has been completed and approved',);
     }
 
     public function store(Request $request, Wallet $wallet)

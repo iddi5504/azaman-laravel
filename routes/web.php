@@ -20,6 +20,8 @@ Route::middleware(['auth', DashboardMiddleware::class])->group(function () {
 
     Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])->name('transaction.show');
 
+    Route::patch('/transactions/approve/{transaction}', [TransactionController::class, 'approveTransaction'])->name('transaction.approveTransaction');
+
     Route::get('/start-transaction/{wallet}', [TransactionController::class, 'create'])->name('transaction.create');
 
     Route::post('/start-transaction/{wallet}', [TransactionController::class, 'store'])->name('transaction.store');

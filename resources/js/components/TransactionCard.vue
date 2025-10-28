@@ -6,7 +6,7 @@
                 <h3 class="text-base font-semibold text-gray-900">{{ transaction.wallet.name }}</h3>
                 <p class="text-sm text-gray-500">{{ transaction.wallet.owner_name }}</p>
             </div>
-            <Badge :variant="badgeColor" class="capitalize bg-secondary">{{ transaction.status }}</Badge>
+            <Badge :variant="badgeColor" class="capitalize">{{ transaction.status }}</Badge>
         </div>
 
         <div class="space-y-2 text-sm text-gray-700">
@@ -55,7 +55,9 @@ const badgeColor = computed(() => {
             return 'pending'
         case 'processing':
             return 'alert'
+
         case 'success':
+        case 'completed':
             return 'success'
         case 'failed':
             return 'destructive'
