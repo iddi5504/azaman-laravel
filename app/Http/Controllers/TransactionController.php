@@ -28,7 +28,13 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
-        $transactions = Transaction::with('wallet')->where('user_id', Auth::user()->id)->get();
+        $transactions = Transaction::with('wallet')->where(function ($q) use ($request) {
+            if ($request->user()->isAdmin()) {
+                return $q;
+            } else {
+                return $q->where('user_id', Auth::user()->id);
+            }
+        })->get();
 
         return Inertia::render('transaction/Index', compact('transactions'));
     }
@@ -51,14 +57,14 @@ class TransactionController extends Controller
     {
         $transaction->status = TransactionStatus::COMPELETED->value;
         $transaction->save();
-        return redirect()->route('transaction.show', $transaction->id)->with('success', 'Transaction has been completed and approved',);
+        return redirect()->route('transaction.show', $transaction->id)->with(getFlashMessageObject('success', 'Transaction has been completed and approved',));
     }
 
     public function rejectTransaction(Transaction $transaction)
     {
         $transaction->status = TransactionStatus::FAILED->value;
         $transaction->save();
-        return redirect()->route('transaction.show', $transaction->id)->with('warning', 'You have rejected this transaction',);
+        return redirect()->route('transaction.show', $transaction->id)->with(getFlashMessageObject('warning', 'You have rejected this transaction',));
     }
 
     public function store(Request $request, Wallet $wallet)
