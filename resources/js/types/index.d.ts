@@ -62,3 +62,22 @@ export interface Wallet {
     tag?: string;
     countries?: string[];
 }
+
+export interface TransactionDetails {
+    amount: string
+    mobile_money_name: string
+    mobile_money_number: string
+    network_provider: string
+}
+
+export interface Transaction {
+    id: number
+    created_at: string
+    updated_at: string
+    details: TransactionDetails
+    wallet_id: number
+    user_id: number
+    status: string
+    mobile_money_network: string | null
+    wallet: Wallet
+}

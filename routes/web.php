@@ -17,7 +17,7 @@ Route::middleware(['auth', DashboardMiddleware::class])->group(function () {
 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transaction.index');
 
-    Route::get('/start-transaction/{wallet}', [TransactionController::class, 'index'])->name('transaction.create');
+    Route::get('/start-transaction/{wallet}', [TransactionController::class, 'create'])->name('transaction.create');
 
     Route::post('/start-transaction/{wallet}', [TransactionController::class, 'store'])->name('transaction.store');
 });

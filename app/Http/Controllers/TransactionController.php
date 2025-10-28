@@ -15,8 +15,9 @@ class TransactionController extends Controller
     //
     public function index(Request $request)
     {
-        $transactions = Transaction::with('wallet')->where('user_id', Auth::user()->id)->get()->toJson();
-        dd($transactions);
+        $transactions = Transaction::with('wallet')->where('user_id', Auth::user()->id)->get();
+
+        return Inertia::render('transaction/Index', compact('transactions'));
     }
 
     public function create(Wallet $wallet)
@@ -41,6 +42,6 @@ class TransactionController extends Controller
             'details' => $validated
         ]);
 
-        return redirect()->route('wallets.index')->with(getFlashMessageObject('success', 'Transaction has started', 'Upload Proof of payment'));
+        return redirect()->route('transaction.index')->with(getFlashMessageObject('success', 'Transaction has started', 'Upload Proof of payment'));
     }
 }

@@ -17,6 +17,7 @@ import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid, User, PlusCircle, Clipboard, Video, Wallet } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import wallets from '@/routes/wallets';
+import transaction from '@/routes/transaction';
 
 const mainNavItems: NavItem[] = [
     {
@@ -29,14 +30,14 @@ const mainNavItems: NavItem[] = [
         href: wallets.index(),
         icon: Wallet,
     },
+    // {
+    //     title: 'Start Transfer',
+    //     href: transaction.create().url,
+    //     icon: PlusCircle,
+    // },
     {
-        title: 'Start Transfer',
-        href: '#',
-        icon: PlusCircle,
-    },
-    {
-        title: 'Open Transactions',
-        href: '#',
+        title: 'Transactions',
+        href: transaction.index().url,
         icon: Clipboard,
     },
     {
