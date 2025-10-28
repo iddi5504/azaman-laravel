@@ -22,6 +22,8 @@ Route::middleware(['auth', DashboardMiddleware::class])->group(function () {
 
     Route::patch('/transactions/approve/{transaction}', [TransactionController::class, 'approveTransaction'])->name('transaction.approveTransaction');
 
+    Route::patch('/transactions/reject/{transaction}', [TransactionController::class, 'rejectTransaction'])->name('transaction.rejectTransaction');
+
     Route::get('/start-transaction/{wallet}', [TransactionController::class, 'create'])->name('transaction.create');
 
     Route::post('/start-transaction/{wallet}', [TransactionController::class, 'store'])->name('transaction.store');

@@ -54,6 +54,13 @@ class TransactionController extends Controller
         return redirect()->route('transaction.show', $transaction->id)->with('success', 'Transaction has been completed and approved',);
     }
 
+    public function rejectTransaction(Transaction $transaction)
+    {
+        $transaction->status = TransactionStatus::FAILED->value;
+        $transaction->save();
+        return redirect()->route('transaction.show', $transaction->id)->with('warning', 'You have rejected this transaction',);
+    }
+
     public function store(Request $request, Wallet $wallet)
     {
         $validated = $request->validate([

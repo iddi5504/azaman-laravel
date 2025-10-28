@@ -97,12 +97,21 @@ const removeFile = () => {
             </Form>
             <!-- approve -->
             <div v-if="$page.props.isAdmin && transaction.status === 'processing'" class="mt-5">
-                <Form method="patch" :action="TransactionRoute.approveTransaction(transaction.id).url"
-                    v-slot="{ processing }">
-                    <Button type="submit" :loading="processing" class="w-full bg-green-600 hover:bg-green-700">
-                        Approve Transaction
-                    </Button>
-                </Form>
+                <div class="flex justify-evenly w-full gap-4">
+                    <Form class="w-full" method="patch" :action="TransactionRoute.rejectTransaction(transaction.id).url"
+                        v-slot="{ processing }">
+                        <Button type="submit" :loading="processing" variant="outline" class="w-full bg-red-50">
+                            Reject Transaction
+                        </Button>
+                    </Form>
+                    <Form class="w-full" method="patch"
+                        :action="TransactionRoute.approveTransaction(transaction.id).url" v-slot="{ processing }">
+                        <Button type="submit" :loading="processing" class="w-full bg-green-600 hover:bg-green-700">
+                            Approve Transaction
+                        </Button>
+                    </Form>
+
+                </div>
                 <p class="text-sm text-gray-600 mt-2">Once approved, the transaction will be processed.</p>
             </div>
         </div>
