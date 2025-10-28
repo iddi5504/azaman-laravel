@@ -64,8 +64,6 @@ const selectProvider = (name: string) => {
         <div class="w-3/6 mx-auto p-3">
             <WalletCard :wallet="wallet" />
 
-
-
             <form @submit.prevent="submitForm" class="grid gap-5 pt-5 mt-4">
                 <div class="space-y-3 p-4 border rounded-lg bg-gray-50 ">
                     <h2 class="text-lg font-semibold">Cashout Request</h2>

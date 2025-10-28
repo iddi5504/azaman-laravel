@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
 use Inertia\Inertia;
 
+
 class TransactionController extends Controller
 {
     //
@@ -18,6 +19,13 @@ class TransactionController extends Controller
         $transactions = Transaction::with('wallet')->where('user_id', Auth::user()->id)->get();
 
         return Inertia::render('transaction/Index', compact('transactions'));
+    }
+
+
+    public function show(Request $request, Transaction $transaction)
+    {
+        $transaction->load('wallet');
+        return Inertia::render('transaction/TransactionShow', compact('transaction'));
     }
 
     public function create(Wallet $wallet)

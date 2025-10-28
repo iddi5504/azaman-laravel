@@ -34,7 +34,7 @@ touch database/database.sqlite
 
 echo "Make migrations"
 
-php artisan migrate:fresh --force
+php artisan migrate --force
 
 echo "Build app"
 

@@ -1,4 +1,5 @@
 <template>
+    <Link :href="TransactionRoute.show(transaction.id).url">
     <Card class="p-5 rounded-xl border hover:shadow-md transition-all duration-200">
         <div class="flex justify-between items-center mb-3">
             <div>
@@ -32,6 +33,7 @@
             <span>ID: {{ transaction.id }}</span>
         </div>
     </Card>
+    </Link>
 </template>
 
 <script setup lang="ts">
@@ -39,10 +41,13 @@ import { computed } from 'vue'
 import Badge from './ui/badge/Badge.vue'
 import Card from './ui/card/Card.vue'
 import { Transaction, TransactionDetails, Wallet } from '@/types'
+import { Link } from '@inertiajs/vue3';
+import * as TransactionRoute from '@/routes/transaction';
 
 
-
-const props = defineProps<{ transaction: Transaction }>()
+const props = withDefaults(defineProps<{ transaction: Transaction, expand?: boolean }>(), {
+    expand: false
+})
 
 const badgeColor = computed(() => {
     switch (props.transaction.status) {
