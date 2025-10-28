@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Wallet extends Model
@@ -17,6 +16,11 @@ class Wallet extends Model
         'countries',
         'gender'
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
     public function scopeFilter($q, array $fields)
     {

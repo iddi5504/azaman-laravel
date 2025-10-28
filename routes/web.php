@@ -7,14 +7,19 @@ use App\Http\Middleware\DashboardMiddleware;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::middleware(['auth', 'verified', DashboardMiddleware::class])->group(function () {
+Route::middleware(['auth', DashboardMiddleware::class])->group(function () {
     Route::get('/', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
     Route::get('/wallets', [WalletController::class, 'index'])->name('wallets.index');
 
+
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transaction.index');
+
     Route::get('/start-transaction/{wallet}', [TransactionController::class, 'index'])->name('transaction.create');
+
+    Route::post('/start-transaction/{wallet}', [TransactionController::class, 'store'])->name('transaction.store');
 });
 
 // Admin routes
