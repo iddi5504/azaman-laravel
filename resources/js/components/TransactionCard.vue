@@ -6,7 +6,7 @@
                 <h3 class="text-base font-semibold text-gray-900">{{ transaction.wallet.name }}</h3>
                 <p class="text-sm text-gray-500">{{ transaction.wallet.owner_name }}</p>
             </div>
-            <Badge :color="badgeColor" class="capitalize">{{ transaction.status }}</Badge>
+            <Badge :variant="badgeColor" class="capitalize bg-secondary">{{ transaction.status }}</Badge>
         </div>
 
         <div class="space-y-2 text-sm text-gray-700">
@@ -38,11 +38,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import Badge from './ui/badge/Badge.vue'
 import Card from './ui/card/Card.vue'
 import { Transaction, TransactionDetails, Wallet } from '@/types'
 import { Link } from '@inertiajs/vue3';
 import * as TransactionRoute from '@/routes/transaction';
+import Badge from './ui/badge/Badge.vue';
 
 
 const props = withDefaults(defineProps<{ transaction: Transaction, expand?: boolean }>(), {
@@ -52,7 +52,9 @@ const props = withDefaults(defineProps<{ transaction: Transaction, expand?: bool
 const badgeColor = computed(() => {
     switch (props.transaction.status) {
         case 'pending':
-            return 'warning'
+            return 'pending'
+        case 'processing':
+            return 'alert'
         case 'success':
             return 'success'
         case 'failed':

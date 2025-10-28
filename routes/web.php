@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionProofController;
 use App\Http\Controllers\WalletController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\DashboardMiddleware;
@@ -22,6 +23,8 @@ Route::middleware(['auth', DashboardMiddleware::class])->group(function () {
     Route::get('/start-transaction/{wallet}', [TransactionController::class, 'create'])->name('transaction.create');
 
     Route::post('/start-transaction/{wallet}', [TransactionController::class, 'store'])->name('transaction.store');
+
+    Route::post('/transaction-proof/{transaction}', [TransactionProofController::class, 'store'])->name('transactionProof.store');
 });
 
 // Admin routes
