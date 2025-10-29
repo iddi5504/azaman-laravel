@@ -89,7 +89,7 @@ const deleteWallet = () => {
             description="This action is irreversible." />
 
         <Dialog v-model="showWalletDetailsDialog" title="Wallet details">
-            <div class="rounded-xl border bg-white p-6 shadow-sm hover:shadow-md transition">
+            <div class="rounded-xl border bg-white p-6 shadow-sm hover:shadow-md transition m-2">
                 <div class="flex items-center gap-4 mb-4">
                     <img :src="wallet.icon ? '/storage/' + wallet.icon : walletIconsMap[wallet.account_type.toLowerCase()]"
                         alt="Wallet Icon" class="h-14 w-14 rounded-full border object-cover" />
