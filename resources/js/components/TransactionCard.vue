@@ -62,7 +62,7 @@ const badgeColor = computed(() => {
         case 'failed':
             return 'destructive'
         default:
-            return 'secondary'
+            return 'alert'
     }
 })
 

@@ -3,7 +3,7 @@ import { Primitive, type PrimitiveProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 
 const props = defineProps<PrimitiveProps & {
-  variant?: 'success' | 'destructive' | 'alert' | 'warning' | 'pending'
+  variant: 'success' | 'destructive' | 'alert' | 'warning' | 'pending'
   class?: HTMLAttributes['class']
 }>()
 

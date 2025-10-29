@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { accountTypeOptions, walletIconsMap } from '@/lib/constants';
 import { Wallet } from '@/types';
-import { Delete, DeleteIcon, Edit, MenuIcon, Trash, View } from 'lucide-vue-next';
+import { Edit, MenuIcon, Trash, View } from 'lucide-vue-next';
 import DropdownMenu from './ui/dropdown-menu/DropdownMenu.vue';
 import AlertDialog from './ui/alert-dialog/AlertDialog.vue';
 import { ref } from 'vue';
