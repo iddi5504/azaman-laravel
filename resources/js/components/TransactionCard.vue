@@ -1,40 +1,46 @@
 <template>
     <Link :href="TransactionRoute.show(transaction.id).url">
-    <Card class="p-5 rounded-xl border hover:shadow-md transition-all duration-200">
-        <div class="flex justify-between items-center mb-3">
+    <Card class="p-5 rounded-2xl border hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
+        <div class="flex justify-between items-start mb-4">
             <div>
-                <h3 class="text-base font-semibold text-gray-900">{{ transaction.wallet.name }}</h3>
+                <h3 class="text-lg font-semibold text-gray-900">{{ transaction.wallet.name }}</h3>
                 <p class="text-sm text-gray-500">{{ transaction.wallet.owner_name }}</p>
             </div>
-            <Badge :variant="badgeColor" class="capitalize">{{ transaction.status }}</Badge>
+            <Badge :variant="badgeColor" class="capitalize px-2 py-0.5 text-xs font-medium">
+                {{ transaction.status }}
+            </Badge>
+        </div>
+
+        <div class="text-center py-3 border-y border-gray-100 mb-3">
+            <p class="text-sm text-gray-500 mb-1">Amount</p>
+            <p class="text-2xl font-bold text-gray-900 tracking-tight">
+                {{ transaction.details.amount }} <span class="text-base text-gray-500">GHS</span>
+            </p>
         </div>
 
         <div class="space-y-2 text-sm text-gray-700">
             <div class="flex justify-between">
-                <span>Amount</span>
-                <span class="font-medium">{{ transaction.details.amount }} GHS</span>
-            </div>
-            <div class="flex justify-between">
                 <span>Mobile Money Name</span>
-                <span>{{ transaction.details.mobile_money_name }}</span>
+                <span class="font-medium">{{ transaction.details.mobile_money_name }}</span>
             </div>
             <div class="flex justify-between">
                 <span>Number</span>
-                <span>{{ transaction.details.mobile_money_number }}</span>
+                <span class="font-medium">{{ transaction.details.mobile_money_number }}</span>
             </div>
             <div class="flex justify-between">
                 <span>Network</span>
-                <span class="capitalize">{{ transaction.details.network_provider }}</span>
+                <span class="capitalize font-medium">{{ transaction.details.network_provider }}</span>
             </div>
         </div>
 
-        <div class="mt-4 text-xs text-gray-400 flex justify-between">
+        <div class="mt-5 flex justify-between items-center text-xs text-gray-400">
             <span>{{ formatDate(transaction.created_at) }}</span>
             <span>ID: {{ transaction.id }}</span>
         </div>
     </Card>
     </Link>
 </template>
+
 
 <script setup lang="ts">
 import { computed } from 'vue'
