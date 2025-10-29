@@ -20,14 +20,14 @@ const isOpen = defineModel<boolean>()
     <DialogPortal>
       <DialogOverlay class="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px]" />
 
-      <DialogContent class="m-3 fixed inset-0 z-50 flex items-center justify-center text-sm text-gray-600">
-        <div class="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
+      <DialogContent class="m-3 fixed inset-0 z-50 flex items-center justify-center text-sm text-foreground">
+        <div class="relative w-full max-w-md rounded-2xl bg-popover p-6 shadow-xl">
           <DialogClose @click="isOpen = false"
-            class="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition">
+            class="absolute right-3 top-3 text-secondary-foreground hover:text-gray-600 transition">
             <XCircle class="h-5 w-5" />
           </DialogClose>
 
-          <DialogTitle class="mb-4 text-lg font-semibold text-gray-900">
+          <DialogTitle class="mb-4 text-lg font-semibold">
             {{ title }}
           </DialogTitle>
 
