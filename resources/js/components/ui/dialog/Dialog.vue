@@ -20,7 +20,7 @@ const isOpen = defineModel<boolean>()
     <DialogPortal>
       <DialogOverlay class="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px]" />
 
-      <DialogContent class="fixed inset-0 z-50 flex items-center justify-center text-sm text-gray-600">
+      <DialogContent class="m-3 fixed inset-0 z-50 flex items-center justify-center text-sm text-gray-600">
         <div class="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
           <DialogClose @click="isOpen = false"
             class="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition">

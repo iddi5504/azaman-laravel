@@ -28,15 +28,16 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
-        $transactions = Transaction::with('wallet')->where(function ($q) use ($request) {
-            if ($request->user()->isAdmin()) {
-                return $q;
-            } else {
-                return $q->where('user_id', Auth::user()->id);
-            }
-        })->get();
+        $transactions = Transaction::with('wallet')->filter($request)->get();
 
-        return Inertia::render('transaction/Index', compact('transactions'));
+        $query = $request->query();
+
+        $wallets = Wallet::select('id', 'name')->get()->map(fn($d) => [
+            'label' => $d->name,
+            'value' => $d->id
+        ]);
+
+        return Inertia::render('transaction/Index', compact('transactions', 'query', 'wallets'));
     }
 
 

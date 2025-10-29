@@ -1,11 +1,10 @@
 
-export enum Genders {
-    MALE = 'Male',
-    FEMALE = 'Female'
+export enum TransactionStatus {
+    PENDING = 'pending',
+    COMPLETED = 'completed',
+    FAILED = 'failed',
+    PROCESSING = 'processing',
 }
-
-// export const accountTypeOptions = ['PayPal', 'CashApp', 'Venmo', 'Zelle', 'Apple Pay', 'Bank Transfer', 'E-Transfer'];
-export const countries = ['US', 'UK', 'Canada'];
 
 export enum WalletType {
     PAYPAL = 'PayPal',
@@ -17,6 +16,13 @@ export enum WalletType {
     ETRANSFER = 'E-Transfer',
 
 }
+
+
+export enum Genders {
+    MALE = 'Male',
+    FEMALE = 'Female'
+}
+export const countries = ['US', 'UK', 'Canada'];
 
 export const walletIconsMap: Partial<Record<string, string>> = {
     paypal: '/assets/images/paypal.png',
@@ -42,4 +48,9 @@ export const accountTypeOptions = Object.keys(WalletType).map((key) => ({
 }));
 
 
+
+export const transactionStatusOptions = Object.keys(TransactionStatus).map((key) => ({
+    label: key,
+    value: TransactionStatus[key as keyof typeof TransactionStatus]
+}));
 

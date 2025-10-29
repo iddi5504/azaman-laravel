@@ -89,3 +89,4 @@ export interface Transaction {
     wallet: Wallet
     transaction_proofs: TransactionProof[]
 }
+

@@ -16,13 +16,12 @@ import {
 } from 'reka-ui';
 import { SelectOption } from '@/types';
 
-const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
     options: SelectOption[];
     placeholder?: string;
 }>()
 
-const selected = defineModel<String | String[]>()
+const selected = defineModel<String | String[] | null>()
 
 const selectedItemIcon = computed(() => props.options.find(o => o.value === selected.value)?.icon)
 </script>
