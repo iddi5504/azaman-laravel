@@ -35,6 +35,10 @@ trait MyStorage
         return $path;
     }
 
+    /**
+     * Delete a file
+     * @param string $path Path of file to delete
+     */
     protected function deleteFile($path)
     {
         // dd($path);
