@@ -65,6 +65,11 @@ class TransactionController extends Controller
         return redirect()->route('transaction.show', $transaction->id)->with(getFlashMessageObject('success', 'Transaction has been completed and approved',));
     }
 
+
+    /**
+     * Reject a transaction by changing the status to failed
+     * @param Transaction $transaction The id of the transaction
+     */
     public function rejectTransaction(Transaction $transaction)
     {
         $transaction->status = TransactionStatus::FAILED->value;
