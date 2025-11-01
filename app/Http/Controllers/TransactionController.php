@@ -54,6 +54,10 @@ class TransactionController extends Controller
         ]);
     }
 
+    /**
+     * Approve a transaction by changing the status to completed
+     * @param Transaction $transaction The id of the transaction
+     */
     public function approveTransaction(Transaction $transaction)
     {
         $transaction->status = TransactionStatus::COMPELETED->value;
