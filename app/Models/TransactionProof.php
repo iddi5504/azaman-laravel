@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class TransactionProof extends Model
 {
-    //
+    
     protected $fillable = [
         'file_path',
         'user_id',
