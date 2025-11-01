@@ -22,6 +22,12 @@ trait MyStorage
         $this->storageInstance = Storage::disk($disk);
     }
 
+    /**
+     * Upload file to storage bucket
+     * @param UploadedFile $file The file to upload
+     * @param string $dir The directory to save to 
+     * @return string Returns the relative path of the uploaded file
+     */
     protected function upload(UploadedFile $file, $dir)
     {
 
