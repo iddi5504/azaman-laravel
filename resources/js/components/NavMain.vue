@@ -18,9 +18,7 @@ const page = usePage();
 </script>
 
 <template>
-    <SidebarGroup class="px-3 py-2">
-        <SidebarGroupLabel class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase">Platform
-        </SidebarGroupLabel>
+    <SidebarGroup class="px-3 pb-2">
         <SidebarMenu class="mt-2 space-y-1">
             <SidebarMenuItem v-for="item in items" :key="item.title">
                 <SidebarMenuButton as-child :is-active="urlIsActive(item.href, page.url)" :tooltip="item.title"
@@ -33,6 +31,7 @@ const page = usePage();
                         class="ml-auto inline-flex items-center justify-center px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100">
                         {{ item.badge }}
                     </span> -->
+
                     </Link>
                 </SidebarMenuButton>
             </SidebarMenuItem>

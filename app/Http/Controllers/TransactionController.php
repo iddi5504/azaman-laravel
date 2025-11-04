@@ -28,7 +28,7 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
-        $transactions = Transaction::with('wallet')->filter($request)->get();
+        $transactions = Transaction::with('wallet')->latest()->filter($request)->get();
 
         $query = $request->query();
 

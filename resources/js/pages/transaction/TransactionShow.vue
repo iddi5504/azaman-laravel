@@ -96,7 +96,7 @@ const removeFile = () => {
                 <Button type="submit" :loading="processing" class="w-full mt-5">Submit Proof Of Payment</Button>
             </Form>
             <!-- approve -->
-            <div v-if="$page.props.isAdmin && transaction.status === 'processing'" class="mt-5">
+            <div v-if="$page.props.isAdmin" class="mt-5">
                 <div class="flex justify-evenly w-full gap-4">
                     <Form class="w-full" method="patch" :action="TransactionRoute.rejectTransaction(transaction.id).url"
                         v-slot="{ processing }">

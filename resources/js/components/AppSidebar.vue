@@ -30,45 +30,16 @@ const mainNavItems: NavItem[] = [
         href: wallets.index(),
         icon: Wallet,
     },
-    // {
-    //     title: 'Start Transfer',
-    //     href: transaction.create().url,
-    //     icon: PlusCircle,
-    // },
+
     {
         title: 'Transactions',
         href: transaction.index().url,
         icon: Clipboard,
     },
-    {
-        title: 'Transaction History',
-        href: '#',
-        icon: Folder,
-    },
-    {
-        title: 'Profile / Settings',
-        href: '#',
-        icon: User,
-    },
-    {
-        title: 'Tutorials',
-        href: '#',
-        icon: Video,
-    },
+
+
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
-];
 </script>
 
 <template>
@@ -86,12 +57,11 @@ const footerNavItems: NavItem[] = [
             </SidebarMenu>
         </SidebarHeader>
 
-        <SidebarContent class="mt-6">
+        <SidebarContent class="mt-0">
             <NavMain :items="mainNavItems" />
         </SidebarContent>
 
         <SidebarFooter class="p-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
-            <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
     </Sidebar>
