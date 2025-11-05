@@ -46,7 +46,6 @@ jobs:
             if [ -d "azaman-laravel" ]; then 
 
               cd azaman-laravel;
-              
             
               git fetch origin master;
               
