@@ -12,7 +12,7 @@ import { LoaderCircle } from 'lucide-vue-next';
 </script>
 
 <template>
-    <AuthBase title="Azaman" description="Pickups Made Perfect">
+    <AuthBase title="MoneyBridge" description="Pickups Made Perfect">
 
         <Head title="Register" />
 
