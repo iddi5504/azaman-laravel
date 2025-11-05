@@ -27,6 +27,10 @@ echo "Generate app key"
 
 php artisan key:generate
 
+echo "Create storage link"
+
+php artisan storage:link
+
 echo "Setup database"
 
 touch database/database.sqlite
