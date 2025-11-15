@@ -18,8 +18,8 @@ Azaman is a Laravel-based web application built for [describe purpose briefly, e
 ## Tech Stack
 
 - **Backend:** Laravel 10, PHP 8.2+
-- **Frontend:** Blade templates, optionally Vue.js or React
-- **Database:** MySQL / MariaDB
+- **Frontend:** Blade templates and Vue.js , Reka-ui , Tailwind
+- **Database:** Postgres
 - **Server:** Nginx
 - **Version Control:** Git
 
